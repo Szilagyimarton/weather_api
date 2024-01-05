@@ -24,8 +24,14 @@
 }
 
 
- h1,h2{
-  text-align: center;
+
+#todayWeather h2 span{
+font-size: 4rem;
+
+}
+#weatherForecast h2 span{
+  font-size: 3rem;
+  
 }
 #weatherForecast{
   display: flex;

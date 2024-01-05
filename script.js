@@ -96,11 +96,11 @@ const makeSymbolsFromWeatherCode = (weatherCode) => {
   weather_mix
   </span>`
     : (weatherCode === 71 || 73 || 75)
-    ? `<span class="material-symbols-outlined" style="color: rgba(229, 229, 240, 0.777)">
+    ? `<span class="material-symbols-outlined" style="color:darkgrey">
   cloudy_snowing
   </span>`
     : weatherCode === 77
-    ? `<span class="material-symbols-outlined" style="color: rgba(229, 229, 240, 0.777)">
+    ? `<span class="material-symbols-outlined" style="color: darkgrey">
   snowing
   </span>`
     : (weatherCode === 80 || weatherCode=== 81 || weatherCode===82)
