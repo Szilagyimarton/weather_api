@@ -1,0 +1,53 @@
+#root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('img/sky-1441936_1920.jpg');
+
+  background-size: cover;
+  
+}
+#todayWeather{
+  border: 0px solid black;
+  background-size: cover;
+  padding: 20px 40px;
+  border-radius: 2%;
+  
+  min-width: 50vw;
+  height: auto;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.6;
+  background-color: rgba(195, 192, 192, 0.846);
+}
+
+
+ h1,h2{
+  text-align: center;
+}
+#weatherForecast{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 5px 10px;
+  
+}
+
+#weatherForecast div{
+  min-width: 200px;
+  max-width: 250px;
+  padding: 10px;
+  background-size: cover;
+  display: flex;
+ flex-direction: column;
+ align-items: center;
+ opacity: 0.7;
+ border-radius: 2%;
+ background-color: rgba(224, 224, 224, 0.846);
+}
+#changeDegreeType{
+  cursor: pointer;
+}
