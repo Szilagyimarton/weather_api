@@ -1,5 +1,5 @@
 const urlAddress =
-  "https://api.open-meteo.com/v1/forecast?latitude=47.4984&longitude=19.0404&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Europe%2FLondon";
+  "https://api.open-meteo.com/v1/forecast?latitude=47.4984&longitude=19.0404&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Europe%2FBerlin";
 
 const fetchURL = async (url) => {
   const response = await fetch(url);
@@ -28,7 +28,7 @@ const getDay = (date) => {
     : "Saturday";
 };
 const insertDataComponent = (date, weather_code, maxTemperature,minTemperature,weatherSymbol) => `
-  <div id="${getDay(date)}">
+  <div id="${getDay(date)}" class="sixDay">
     <h1 class="day">${getDay(date)}</h1>
     <h2>${weatherSymbol}</h2
     <h3 class="weatherCode">${translateWeatherCode(weather_code)}</h3>
@@ -121,6 +121,49 @@ const makeSymbolsFromWeatherCode = (weatherCode) => {
   </span> `
     : null;
 };
+const todayDataComponent = (data,num) => `
+<p>Click to change:<span id="changeDegreeType"> °C | °F </span></p>
+<h1>${getDay(data.daily.time[num])}</h1>
+<h2>${makeSymbolsFromWeatherCode(data.daily["weather_code"][num])}
+<h3>${translateWeatherCode(data.daily["weather_code"][num])} </h3>
+
+<h4>Max Temp.: <span class="celsiusOrFahrenheit">${data.daily["temperature_2m_max"][num]} °C</span> </h4>
+<h5>Min Temp.: <span class="celsiusOrFahrenheit">${data.daily["temperature_2m_min"][num]} °C</span></h5>
+<p>Sunrise: ${data.daily.sunrise[num].split("T")[1]}</p>
+<p>Sunset: ${data.daily.sunset[num].split("T")[1]}</p>
+`;
+
+let indexOfSelectedDay = 0
+const makeData = (data, weatherForecastElement) => {
+  for (let i = 0; i < 7; i++) {
+    if(i === indexOfSelectedDay){
+      continue
+    }
+    const date = data.daily.time[i];
+    const weatherCode = data.daily.weather_code[i];
+    const weatherSymbol = makeSymbolsFromWeatherCode(weatherCode)
+    const maxTemperature = data.daily.temperature_2m_max[i];
+    const minTemperature = data.daily.temperature_2m_min[i];
+    weatherForecastElement.insertAdjacentHTML( "beforeend",
+    insertDataComponent(date, weatherCode, maxTemperature, minTemperature,weatherSymbol)
+    );
+  }
+};
+const handleClickedDay = (e,data,todayWeatherelement,weatherForecastElement) => {
+  const target = e.target
+  if(target.className === "day"){
+    const index = data.daily.time.findIndex(date => target.textContent === getDay(date))
+    if(index >= 0) {
+        console.log(index)
+        indexOfSelectedDay = index
+        weatherForecastElement.innerHTML = ""
+        makeData(data,weatherForecastElement)
+        todayWeatherelement.innerHTML = todayDataComponent(data,index)
+        todayWeatherelement.scrollIntoView({ behavior: 'auto' })
+      } 
+  }
+ 
+}
 
 const handlehangeDegreeType = (e) => {
   if(e.target.id === "changeDegreeType"){
@@ -142,42 +185,18 @@ const handlehangeDegreeType = (e) => {
   }
 }
 
-const makeData = (data, weatherForecastElement) => {
-  for (let i = 1; i < 7; i++) {
-    const date = data.daily.time[i];
-    const weatherCode = data.daily.weather_code[i];
-    const weatherSymbol = makeSymbolsFromWeatherCode(weatherCode)
-    const maxTemperature = data.daily.temperature_2m_max[i];
-    const minTemperature = data.daily.temperature_2m_min[i];
-    weatherForecastElement.insertAdjacentHTML( "beforeend",
-      insertDataComponent(date, weatherCode, maxTemperature, minTemperature,weatherSymbol)
-    );
-  }
-};
-
-const todayDataComponent = (data,num) => `
-  <p>Click to change:<span id="changeDegreeType"> °C | °F </span></p>
-  <h1>${getDay(data.daily.time[num])}</h1>
-  <h2>${makeSymbolsFromWeatherCode(data.daily["weather_code"][num])}
-  <h3>${translateWeatherCode(data.daily["weather_code"][num])} </h3>
-
-  <h4>Max Temp.: <span class="celsiusOrFahrenheit">${data.daily["temperature_2m_max"][num]} °C</span> </h4>
-  <h5>Min Temp.: <span class="celsiusOrFahrenheit">${data.daily["temperature_2m_min"][num]} °C</span></h5>
-  <p>Sunrise: ${data.daily.sunrise[num].split("T")[1]}</p>
-  <p>Sunset: ${data.daily.sunset[num].split("T")[1]}</p>
-`;
-
 async function init() {
   const rootElement = document.querySelector("#root");
   rootElement.innerHTML = skeleton();
   const todayWeatherelement = document.querySelector("#todayWeather");
   const weatherForecastElement = document.querySelector("#weatherForecast");
   const data = await fetchURL(urlAddress);
-  todayWeatherelement.insertAdjacentHTML("beforeend", todayDataComponent(data,0));
+  todayWeatherelement.insertAdjacentHTML("beforeend", todayDataComponent(data,indexOfSelectedDay));
   makeData(data, weatherForecastElement);
 
   window.addEventListener("click", (e) =>{
     handlehangeDegreeType(e)
+    handleClickedDay(e,data,todayWeatherelement,weatherForecastElement)
   })
 }
 init();

@@ -1,11 +1,15 @@
+
 #root{
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: url('img/sky-1441936_1920.jpg');
-
   background-size: cover;
   
+}
+body{
+  margin: 0;
+
 }
 #todayWeather{
   border: 0px solid black;
@@ -23,7 +27,9 @@
   background-color: rgba(195, 192, 192, 0.846);
 }
 
-
+h1{
+  cursor: pointer;
+}
 
 #todayWeather h2 span{
 font-size: 4rem;
