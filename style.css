@@ -49,7 +49,7 @@ font-size: 4rem;
 }
 
 #weatherForecast div{
-  min-width: 200px;
+ width: 100%;
   max-width: 250px;
   padding: 10px;
   background-size: cover;
