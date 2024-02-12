@@ -127,8 +127,8 @@ const todayDataComponent = (data,num) => `
 <h2>${makeSymbolsFromWeatherCode(data.daily["weather_code"][num])}
 <h3>${translateWeatherCode(data.daily["weather_code"][num])} </h3>
 
-<h4>Max Temp.:  <span class="celsiusOrFahrenheit"> ${data.daily["temperature_2m_max"][num]} °C</span> </h4>
-<h5>Min Temp.: <span class="celsiusOrFahrenheit"> ${data.daily["temperature_2m_min"][num]} °C</span></h5>
+<h4>Max Temp.: <span class="celsiusOrFahrenheit">${data.daily["temperature_2m_max"][num]} °C</span> </h4>
+<h5>Min Temp.: <span class="celsiusOrFahrenheit">${data.daily["temperature_2m_min"][num]} °C</span></h5>
 <p>Sunrise: ${data.daily.sunrise[num].split("T")[1]}</p>
 <p>Sunset: ${data.daily.sunset[num].split("T")[1]}</p>
 `;
