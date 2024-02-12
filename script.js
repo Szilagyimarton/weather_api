@@ -154,12 +154,11 @@ const handleClickedDay = (e,data,todayWeatherelement,weatherForecastElement) => 
   if(target.className === "day"){
     const index = data.daily.time.findIndex(date => target.textContent === getDay(date))
     if(index >= 0) {
-        console.log(index)
         indexOfSelectedDay = index
         weatherForecastElement.innerHTML = ""
         makeData(data,weatherForecastElement)
         todayWeatherelement.innerHTML = todayDataComponent(data,index)
-        todayWeatherelement.scrollIntoView({ behavior: 'auto' })
+        todayWeatherelement.scrollIntoView({ behavior: 'smooth' })
       } 
   }
  
@@ -171,9 +170,7 @@ const handlehangeDegreeType = (e) => {
     spanElements.forEach(element => {
       const value = element.innerHTML.split(" ")[0]
       const degree = element.innerHTML.split(" ")[1]
-   
-      console.log(element.innerHTML.split(" "))
-    
+     
       if(degree === "°C"){
        element.innerHTML = (Number(value) * (9/5) + 32).toFixed(1) + " °F"
       }
