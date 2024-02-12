@@ -14,7 +14,7 @@ body{
   background-image: url('img/sky-1441936_1920.jpg');
   border: 0px solid black;
   background-size: cover;
-  padding: 20px 40px;
+  padding: 20px 30px;
   border-radius: 2%;
   
   background-size: cover;
@@ -28,10 +28,6 @@ body{
  
 }
 
-#weatherForecast h1{
-  cursor: pointer;
- 
-}
 
 #todayWeather h2 span{
   font-size: 4rem;
@@ -43,6 +39,10 @@ body{
 #weatherForecast h2 span{
   font-size: 3rem;
   
+}
+#weatherForecast h1{
+  cursor: pointer;
+ 
 }
 #weatherForecast{
   display: flex;
