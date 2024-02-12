@@ -3,20 +3,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('img/sky-1441936_1920.jpg');
-  background-size: cover;
+
+     background-color: rgba(195, 192, 192, 0.846); 
   
 }
 body{
   margin: 0;
-
+  
 }
 #todayWeather{
+  background-image: url('img/sky-1441936_1920.jpg');
   border: 0px solid black;
   background-size: cover;
   padding: 20px 40px;
   border-radius: 2%;
   
+  background-size: cover;
   min-width: 50vw;
   height: auto;
   margin: 10px;
@@ -24,7 +26,6 @@ body{
   flex-direction: column;
   align-items: center;
   opacity: 0.6;
-  background-color: rgba(195, 192, 192, 0.846);
 }
 
 h1{
@@ -49,6 +50,8 @@ font-size: 4rem;
 }
 
 #weatherForecast div{
+  background-image: url('img/sky-1441936_1920.jpg');
+  background-size: cover;
  width: 100%;
   max-width: 250px;
   padding: 10px;
@@ -63,3 +66,4 @@ font-size: 4rem;
 #changeDegreeType{
   cursor: pointer;
 }
+
